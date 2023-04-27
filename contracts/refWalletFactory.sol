@@ -25,7 +25,7 @@ contract refWalletFactory {
     }
 
     function createRefAddress(address _parent) external returns(address _pair){
-        // __user = new refWallet(msg.sender, _user);
+        require(msg.sender != _parent, "Cyclic Referal Restricted!");
         bytes memory bytecode = type(refWallet).creationCode;
         require(getUser[msg.sender].LockPair == address(0), "Referal Pair Exist!");
         _parent = (_parent == address(0))? address(0) : _parent;
