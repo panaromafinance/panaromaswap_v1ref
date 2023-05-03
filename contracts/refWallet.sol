@@ -41,8 +41,8 @@ contract refWallet is Receiver {
     }
 
     // callable by owner only, after specified time, only for Tokens implementing ERC20
-    function withdrawTokens(address _tokenContract) onlyOwner public {
-        IERC20(_tokenContract).transfer(owner, IERC20(_tokenContract).balanceOf(address(this)));      
+    function withdrawTokens(address _tokenContract) onlyOwner public returns(bool ){
+        return IERC20(_tokenContract).transfer(owner, IERC20(_tokenContract).balanceOf(address(this)));      
     }
 
     function getBalance(address _tokenContract) public view returns(uint256 ){
