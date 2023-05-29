@@ -29,11 +29,6 @@ contract refWalletFactory {
         getUser[msg.sender].Referal = address(0);
     }
 
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-
     function createRefAddress(address _parent) external returns(address _pair){
         require(getUser[_parent].LockPair != address(0), "Invalid Referal Address!");
         require(msg.sender != _parent, "Cyclic Referal Restricted!");
