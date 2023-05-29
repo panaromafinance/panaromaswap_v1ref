@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.6.6;
 
 import "./interface/IERC20.sol";
+import "./Address.sol";
 
 contract Receiver {
     event ValueReceived(address user, uint amount);
@@ -37,7 +39,7 @@ contract refWallet is Receiver {
 
     // callable by owner only, after specified time
     function withdraw() onlyOwner public {
-       msg.sender.transfer(address(this).balance);  
+       Address.sendValue(msg.sender, address(this).balance);
     }
 
     // callable by owner only, after specified time, only for Tokens implementing ERC20
